@@ -1,0 +1,159 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,False}}
+{{extend 'layout.html'}}
+
+<script type="text/javascript">
+    function myFunction()
+    {
+        document.getElementById("myForm").submit();
+    }
+    function bookTickets()
+    {
+        if(document.getElementById("cityId").value=="default")
+        {
+            document.getElementById("cityError").innerHTML="Please select city name";
+            return;
+        }
+        else
+        {
+            document.getElementById("cityError").innerHTML="";
+        }
+        if(document.getElementById("theatreId").value=="default")
+        {
+            document.getElementById("theatreError").innerHTML="Please select theatre name";
+            return;
+        }
+        else
+        {
+            document.getElementById("theatreError").innerHTML="";
+        }
+        if(document.getElementById("movieId").value=="default")
+        {
+            document.getElementById("movieError").innerHTML="Please select movie name";
+            return;
+        }
+        else
+        {
+            document.getElementById("movieError").innerHTML="";
+        }
+        if(document.getElementById("time").value=="default")
+        {
+            document.getElementById("timeError").innerHTML="Please select show time";
+            return;
+        }
+        else
+        {
+            document.getElementById("timeError").innerHTML="";
+        }
+        if(document.getElementById("quantity").value=="default")
+        {
+            document.getElementById("quantityError").innerHTML="Please select number of seats";
+            return;
+        }
+        else
+        {
+            document.getElementById("quantityError").innerHTML=""
+        }
+        document.getElementById("myForm").action="seats";
+        document.getElementById("myForm").submit();
+    }
+</script>
+
+    <form id="myForm" action="{{=URL('index')}}" method="post">
+        <table>
+            <tr>
+                <td>
+                    <select id="cityId" name="city" onchange="myFunction()" style="width:100%">
+                        <option value="default"> Select City</option>
+                        {{for row in cities:}}
+                        {{if row.cityName==city:}}
+                        <option id="{{=row.cityName}}" selected>{{=row.cityName}}</option>
+                        {{else:}}
+                        {{=OPTION(row.cityName,_id=row.cityName)}}
+                        {{pass}}
+                        {{pass}}
+                    </select>
+                </td>
+                <td id="cityError" style="color:red; font-style:italic; font-size:12px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="theatreId" name="theatre" onchange="myFunction()" style="width:100%">
+                        <option value="default"> Select Theatre</option>
+                        {{ for counter in theatres: }}
+                        {{if counter==theatre:}}
+                        <option id="{{=counter}}" selected>{{=counter}}</option>
+                        {{else:}}
+                        {{=OPTION(counter,_id=counter)}}
+                        {{pass}}
+                        {{pass}}
+                    </select>
+                </td>
+                <td id="theatreError" style="color:red; font-style:italic; font-size:12px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="movieId" name="movie" onchange="myFunction()" style="width:100%">
+                        <option value="default"> Select Movie</option>
+                        {{ for counter1 in movies:}}
+                        {{if counter1==movie:}}
+                        <option id="{{=counter1}}" selected>{{=counter1}}</option>
+                        {{else:}}
+                        {{=OPTION(counter1,_id=counter1)}}
+                        {{pass}}
+                        {{pass}}
+                    </select>
+                </td>
+                <td id="movieError" style="color:red; font-style:italic; font-size:12px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="time" name="time" style="width:100%">
+                        <option value="default" > Select Time</option>
+                        {{ for counter2 in showTime:}}
+                        {{=OPTION(counter2,_id=counter2)}}
+                        {{pass}}
+                    </select>
+                </td>
+                <td id="timeError" style="color:red; font-style:italic; font-size:12px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="quantity" name="quantity" style="width:100%">
+                        <option value="default"> Select Quantity</option>
+                        <option id="1">1</option>
+                        <option id="2">2</option>
+                        <option id="3">3</option>
+                        <option id="4">4</option>
+                        <option id="5">5</option>
+                        <option id="6">6</option>
+                        <option id="7">7</option>
+                        <option id="8">8</option>
+                        <option id="9">9</option>
+                        <option id="10">10</option>
+                    </select>
+                </td>
+                <td id="quantityError" style="color:red; font-style:italic; font-size:12px"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="bookTickets()" value="Book Tickets" /></td>
+            </tr>
+        </table>
+    </form>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br>
+
+
+<!--
+<ol>
+  <li>{{=T('You are successfully running web2py')}}</li>
+  <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
+  <li>{{=XML(T('Which called the function %s located in the file %s',
+             (A(request.function+'()',_href='#'),
+              A('web2py/applications/%(application)s/controllers/%(controller)s.py'%request,
+               _href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}</li>
+  <li>{{=XML(T('The output of the file is a dictionary that was rendered by the view %s',
+           A('web2py/applications/%(application)s/views/%(controller)s/index.html'%request,
+           _href=URL('admin','default','peek',args=(request.application,'views',request.controller,'index.html')))))}}</li>
+  <li>{{=T('You can modify this application and adapt it to your needs')}}</li>
+</ol>
+-->

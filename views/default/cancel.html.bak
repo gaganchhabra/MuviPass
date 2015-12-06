@@ -1,0 +1,103 @@
+{{extend 'layout.html'}}
+<h1>Cancel Your Ticket Here</h1>
+<script>
+    var booking=null;
+    var error=null;
+    
+    function validate()
+    {
+        booking=document.getElementById("bookingid");
+        error=document.getElementById("error");
+        myForm=document.getElementById("myForm");
+        var regex='^[1-9][0-9]{5,}$'
+        
+        if(booking.value.length==0){
+            error.innerHTML="Missing Field!"
+        }
+        else if(booking.value.match(regex)){
+            //alert("ok")
+            //error.innerHTML="OK"
+            myForm.submit()
+        }
+        else{
+            error.innerHTML="Invalid BookingId!"
+            //alert("not ok")
+        }
+    
+    }
+</script>
+    
+<form action="cancel" method="post" id="myForm">
+    <table>
+        <tr>
+            <td>
+                Booking Id: 
+            </td>
+            <td>
+                    <input type="text" size="10" name="bookingid" id="bookingid"/>
+            </td>
+            <td>
+                <div name="error" id="error" style="color:red">
+                    
+                </div>
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="2" style="text-align:center">
+                <input type="button" value="Cancel Ticket" onclick="validate()">
+            </td>
+        </tr>
+        
+    </table>
+
+</form>
+<!--Booking.bookingId	Booking.movieId	Booking.theatreId	Booking.showTime -->
+{{
+
+if request.vars.bookingid:
+fetched=db(db.Booking.bookingId==request.vars.bookingid).select()
+mid=""
+tid=""
+shwTym=""
+if len(fetched):
+mid=fetched[0].movieId
+tid=fetched[0].theatreId
+shwTym=fetched[0].showTime
+seatss=fetched[0].seats
+seatsList=list()
+seatsList=fetched[0].seats.split(',')
+
+rows=db((db.ShowDetails.movieId==mid)&(db.ShowDetails.theatreId==tid)&(db.ShowDetails.showTime==shwTym)).select()
+
+if len(rows):
+allSeatsStr=rows[0].seats
+pass
+
+allSeatsList=allSeatsStr.split(',')
+allSeatsList=allSeatsList[:len(allSeatsList)-1]
+
+for itemToBDel in seatsList:
+allSeatsList.remove(itemToBDel)
+pass
+
+final=",".join(allSeatsList)
+final=final+','
+
+
+db(db.Booking.bookingId==request.vars.bookingid).delete()
+db((db.ShowDetails.movieId==mid)&(db.ShowDetails.theatreId==tid)&(db.ShowDetails.showTime==shwTym)).update(seats=final)
+=T("Your tickets are cancelled!")
+
+
+else:
+}}
+<script>
+    err=document.getElementById("error");
+    err.innerHTML="BookingId Doesnt Exist!"
+</script>
+{{
+pass
+pass
+}}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

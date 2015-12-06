@@ -1,0 +1,123 @@
+{{extend 'layout.html'}}
+
+<script>
+    var sub=document.getElementById("submittedQty").value.parseInt();
+    var countOfMarked=0;
+
+    
+    function validateAndSubmit()
+    {
+        var seats="";
+        var chks= document.getElementsByName("checks")
+        var hiddenseats=document.getElementById("seatsList");
+        var countOfMarked=0;
+        //alert("THis is the length: before the loop"+chks.length);
+        for (i=0;i<chks.length;i++)
+            if(chks[i].checked){
+                countOfMarked++;
+                //alert(chks[i].getAttribute('id').toString())
+                seats=chks[i].getAttribute('id').toString() + "," + seats.toString()
+            }
+        //alert("this is the count"+countOfMarked);
+        //alert(seats)
+        
+        hiddenseats.value=seats;
+        if(countOfMarked!={{=qty}})
+        {
+            alert("Please select entered amount of seats!");
+            document.getElementById("seats").reset();
+            countOfMarked=0;
+        return false
+        }
+        //alert("form submitted")
+        //alert(hiddenseats.value)
+        document.forms[0].submit();
+        
+    }
+    
+</script>
+<h1>Select seats of your choice!</h1>
+<div style="margin:0 auto;">
+<form id="seats" name="seats" action="confirm" method="post">
+    
+    <input type="hidden" value="{{=qty}}" id="submittedQty">
+<input type="hidden" value="" id="seatsList" name="seatsList">
+
+        
+
+    <div style="text-align:left;float:left">
+        Available: {{=IMG(_src=URL('static','avail.png') , _alt='booked') }}
+        Booked: {{=IMG(_src=URL('static','booked.png') , _alt='booked')}}
+    </div>
+    <div style="text-align:right;float:left"> &nbsp;&nbsp;
+        <input type="button" value="Book Now" onclick="validateAndSubmit()"/>
+    </div>
+
+    
+    <div style="float:left">
+        
+
+        <table id="grid" style="border:3px solid #AAAA11;background-color:white;width:90%;">
+<tr>
+    <td><br>{{rowName='A'
+        =rowName}}</td>
+{{
+    row=1
+    
+    for i in range(0,200):
+        temp=(i+1)%20
+    if temp ==0:
+    temp=20
+    row+=1
+    pass
+
+    if row ==2:
+    rowName='B'
+elif row==3:
+    rowName='C'
+elif row==4:
+    rowName='D'
+elif row==5:
+    rowName='E'
+elif row == 6:
+    rowName='F'
+elif row==7:
+    rowName='G'
+elif row==8:
+    rowName='H'
+elif row==9:
+    rowName='I'
+elif row==10:
+    rowName='J'
+    pass
+
+    }}
+    <td>
+        {{
+        if i+1 in booked:
+        =IMG(_src=URL('static','booked.png') , _alt='booked', _width='28' , _height='30')
+        
+        }}
+        <input type="checkbox" disabled="disabled" checked="checked">
+        {{
+        else:
+        x=DIV(IMG(_src=URL('static','avail.png') , _alt='avail' , _width='30' , _height='30'),
+        INPUT(_type='checkbox', _name="checks",_id=i))
+        =x
+        pass
+        }}
+        
+    </td>
+    {{
+    if (i+1) % 20 == 0 and i<=190 :
+    }}
+        </tr><tr><td><br>{{=rowName}}</td>
+    {{
+    pass
+    pass
+    }}
+</table>
+    </div>
+</form>
+ <div style="background-color:black;height:50px;width:91%;text-align:center;border-radius:25px;font-size:150%;float:left"><br />Screen this side</div>
+    </div>

@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<h3>Your Booking Details</h3>
+{{
+=BEAUTIFY(data)
+}}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

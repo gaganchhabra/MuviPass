@@ -1,0 +1,51 @@
+{{extend 'layout.html'}}
+<div>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr style="background-color:black;">
+                        <td>{{=IMG(_src=URL('static/images','TheHungerGames.jpeg') , _alt='The Hunger Games', _width='250',_height='200') }}</td>
+                        <td style="color:yellow;text-align:center;">The Hunger Games</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <embed width="250" height="200" src="http://www.youtube.com/v/FovFG3N_RSU" type="application/x-shockwave-flash" />
+                        </td>
+                    </tr>
+                    <tr style="background-color:black;">
+                       <td>{{=IMG(_src=URL('static/images','DeliveryMan.jpeg') , _alt='Delivery Man', _width='250',_height='200') }}</td>
+                       <td style="color:yellow;text-align:center;">Delivery Man</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <embed width="250" height="200" src="http://www.youtube.com/v/V1lZKDNJ4aQ" type="application/x-shockwave-flash" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr style="background-color:black;">
+                       <td>{{=IMG(_src=URL('static/images','RamLeela.jpeg') , _alt='Ram Leela', _width='250',_height='200') }}</td>
+                       <td style="color:yellow;text-align:center;">Ram Leela</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <embed width="250" height="200" src="http://www.youtube.com/v/YQPfeinXxcA" type="application/x-shockwave-flash" />
+                        </td>
+                    </tr>
+                    <tr style="background-color:black;">
+                       <td>{{=IMG(_src=URL('static/images','GoriTerePyaarMein.jpeg') , _alt='Gori Tere Pyaar Mein', _width='250',_height='200') }}</td>
+                       <td style="color:yellow;text-align:center;">Gori Tere Pyaar Mein</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <embed width="250" height="200" src="http://www.youtube.com/v/cg-t4Wsa6LU" type="application/x-shockwave-flash" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

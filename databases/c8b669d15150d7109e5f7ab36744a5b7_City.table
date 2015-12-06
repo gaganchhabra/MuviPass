@@ -1,0 +1,43 @@
+(dp1
+S'theatreId'
+p2
+(dp3
+S'length'
+p4
+S'reference Theatre.theatreId'
+p5
+sS'unique'
+p6
+I00
+sS'sortable'
+p7
+I2
+sS'sql'
+p8
+S'INTEGER NOT NULL'
+p9
+sS'notnull'
+p10
+I01
+sS'type'
+p11
+S'integer'
+p12
+ssS'cityName'
+p13
+(dp14
+g4
+I512
+sg6
+I00
+sg7
+I1
+sg8
+S'CHAR(512) NOT NULL'
+p15
+sg10
+I01
+sg11
+S'string'
+p16
+ss.

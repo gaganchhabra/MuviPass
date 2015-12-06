@@ -1,0 +1,59 @@
+{{extend 'layout.html'}}
+<h1>Confirm Things</h1>
+
+
+{{
+    mv=(db((db.Movie.movieId==session.movie)).select(db.Movie.movieName))
+    th=(db((db.Theatre.theatreId==session.theatre)).select(db.Theatre.theatreName))
+    for m in mv:
+    muvi=m.movieName
+    pass
+    for t in th:
+    theatr=t.theatreName
+    pass
+}}
+<form action="final" method="post" id="myForm" >
+    
+<table>
+    <tr>
+        <td>Movie Name</td>
+        <td>{{=T(muvi)}}</td>
+    </tr>
+    <tr>
+        <td>Theatre Name</td>
+        <td>{{=T(theatr)}}</td>
+    </tr>
+    <tr>
+        <td>Your Seats</td>
+        <td>{{=T(" ,  ".join(seats))}}</td>
+    </tr>
+    <tr>
+        <td>Amount</td>
+        <td>{{=len(seats)*150}}</td>
+    </tr>
+    <tr><td>
+        Enter Email:
+    </td>
+    <td>
+        {{=INPUT(_type='text',_name='email', _id='email')}}
+    </td>
+    </tr>
+
+</table>
+<input type="button" value="Confirm And Pay" onclick="checkEmail()" >
+</form>
+
+<script language="javascript">
+function checkEmail()
+    {
+    var email = document.getElementById('email');
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (!filter.test(email.value)) {
+    alert('Please provide a valid email address');
+    email.focus;
+    return false;
+ }
+        document.getElementById("myForm").submit();
+}</script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br>
